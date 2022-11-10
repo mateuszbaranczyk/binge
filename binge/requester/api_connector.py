@@ -1,5 +1,6 @@
-import requests
 import os
+
+import requests
 
 url = "https://imdb-api.com/en/API"
 query = "SearchSeries"
@@ -9,9 +10,6 @@ expression = "lost"
 path = f"{url}/{query}/{api_key}/{expression}"
 
 result = requests.request("GET", path)
-
-
-
 
 
 class Requester:
@@ -24,4 +22,3 @@ class Requester:
 
     def get_single_episode(self):
         pass
-
