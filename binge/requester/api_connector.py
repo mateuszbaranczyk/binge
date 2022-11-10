@@ -2,14 +2,14 @@ import os
 
 import requests
 
-url = "https://imdb-api.com/en/API"
-query = "SearchSeries"
-api_key = os.getenv("IMDB_API_KEY")
-expression = "lost"
+# url = "https://imdb-api.com/en/API"
+# query = "SearchSeries"
+# api_key = os.getenv("IMDB_API_KEY")
+# expression = "lost"
 
-path = f"{url}/{query}/{api_key}/{expression}"
+# path = f"{url}/{query}/{api_key}/{expression}"
 
-result = requests.request("GET", path)
+# result = requests.request("GET", path)
 
 
 class Requester:
@@ -17,8 +17,11 @@ class Requester:
         self.url = "https://imdb-api.com/en/API/"
         self.api_key = os.getenv("IMDB_API_KEY")
 
-    def get_id_by_phrase(self, phrase):
-        pass
+    def get_id_by_phrase(self, phrase:str) -> str:
+        query = "SearchSeries"
+        url = f"{self.url}/{query}/{self.api_key}/{phrase}"
+        response = requests.request(method="get", url=url)
+        return response
 
     def get_single_episode(self):
         pass
