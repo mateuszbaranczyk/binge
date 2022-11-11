@@ -3,6 +3,7 @@ import os
 import requests
 from ast import literal_eval
 
+#TODO api errors handling
 
 class Requester:
     def __init__(self):
@@ -12,8 +13,7 @@ class Requester:
     def get_id_by_phrase(self, phrase:str) -> str:
         query = "SearchSeries"
         url = f"{self.url}/{query}/{self.api_key}/{phrase}"
-        response = requests.get(url=url)
-        response = response.text
+        response = requests.get(url=url).text
         best_match = literal_eval(response)["results"][0]
         return best_match["id"]
 
