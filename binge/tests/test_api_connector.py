@@ -8,6 +8,7 @@ from binge.tests.testing_responses import SearchSeries_response, Title_response
 def test_get_id_by_phrase():
     with patch("requests.get") as mocked_request:
         mocked_request.return_value.text = str(SearchSeries_response)
+        mocked_request.return_value.status_code = 200
         requester = Requester()
         result = requester.get_id_by_phrase("lost")
         assert result == "tt0411008"
@@ -16,6 +17,7 @@ def test_get_id_by_phrase():
 def test_get_title_data():
     with patch("requests.get") as mocked_request:
         mocked_request.return_value.text = str(Title_response)
+        mocked_request.return_value.status_code = 200
         requester = Requester()
         result = requester.get_title_data("tt0411008")
         assert result == (

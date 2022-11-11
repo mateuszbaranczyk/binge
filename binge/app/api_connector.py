@@ -10,11 +10,9 @@ class Requester:
         self.api_key = os.getenv("IMDB_API_KEY")
 
     def get_id_by_phrase(self, phrase: str) -> str:
-        query = "SearchSeries"
-        url = f"{self.url}/{query}/{self.api_key}/{phrase}"
-        response = requests.get(url=url).text
-        best_match = literal_eval(response)["results"][0]
-        return best_match["id"]
+        response = self._make_request(query="SearchSeries", query_params=phrase)
+        best_match = response["results"][0]["id"]
+        return best_match 
 
     def get_title_data(self, title_id: str) -> Tuple[int, str, str]:
         query = "Title"
