@@ -15,10 +15,7 @@ class Requester:
         return best_match 
 
     def get_title_data(self, title_id: str) -> Tuple[int, str, str]:
-        query = "Title"
-        url = f"{self.url}/{query}/{self.api_key}/{title_id}"
-        response = requests.get(url=url).text
-        response = literal_eval(response)
+        response = self._make_request(query="Title", query_params=title_id)
         num_seasons = response["tvSeriesInfo"]["seasons"][-1]
         full_title = response["fullTitle"]
         image = response["image"]
