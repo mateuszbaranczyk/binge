@@ -24,11 +24,20 @@ def test_get_title_data():
             "6",
             "Lost (TV Series 2004–2010)",
             "https://m.media-amazon.com/images/M/MV5BNzhlY2E5NDUtYjJjYy00ODg3LWFkZWQtYTVmMzU4ZWZmOWJkXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_Ratio0.6762_AL_.jpg",
+            "null"
         )
 
 
 def test_get_title_duration():
     pass
+
+def test_get_season_duration():
+    with patch("requests.get") as mocked_request:
+        mocked_request.return_value.text = str(Title_response)
+        mocked_request.return_value.status_code = 200
+        requester = Requester()
+        result = requester.get_season_duration(title_id="tt0411008", season_number=1)
+        # https://imdb-api.com/api
 
 def test_make_request():
     with patch("requests.get") as mocked_request:
@@ -46,5 +55,3 @@ def test_make_request_with_api_error():
             result = requester._make_request("query", "query_params")
         except AssertionError:
             pass
-
-        
