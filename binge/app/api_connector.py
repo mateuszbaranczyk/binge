@@ -1,15 +1,7 @@
 import os
 
 import requests
-
-url = "https://imdb-api.com/en/API"
-query = "SearchSeries"
-api_key = os.getenv("IMDB_API_KEY")
-expression = "lost"
-
-path = f"{url}/{query}/{api_key}/{expression}"
-
-result = requests.request("GET", path)
+from ast import literal_eval
 
 
 class Requester:
@@ -22,7 +14,8 @@ class Requester:
         url = f"{self.url}/{query}/{self.api_key}/{phrase}"
         response = requests.get(url=url)
         response = response.text
-        return response
+        best_match = literal_eval(response)["results"][0]
+        return best_match["id"]
 
     def get_single_episode(self):
         pass

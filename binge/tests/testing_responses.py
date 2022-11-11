@@ -1,5 +1,4 @@
-SearchSeries_api_response = {
-    "searchType": "Series",
+SearchSeries_api_response = {"searchType": "Series",
     "expression": "lost",
     "results": [
         {
