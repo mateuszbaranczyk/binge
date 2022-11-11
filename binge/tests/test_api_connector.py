@@ -1,5 +1,4 @@
 from unittest.mock import patch
-import json
 
 from binge.app.api_connector import Requester
 from binge.tests.testing_responses import SearchSeries_api_response
