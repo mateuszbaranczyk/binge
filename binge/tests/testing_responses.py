@@ -5,7 +5,7 @@ SearchSeries_response = {
         {
             "id": "tt0411008",
             "resultType": "Title",
-            "image": "https://m.media-amazon.com/images/M/MV5BNzhlY2E5NDUtYjJjYy00ODg3LWFkZWQtYTVmMzU4ZWZmOWJkXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_Ratio0.7273_AL_.jpg",
+            "image": "https://aws.com/img/gole_baby.jpg",
             "title": "Lost",
             "description": "(2004) (TV Series)",
         },

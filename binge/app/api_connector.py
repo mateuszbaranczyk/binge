@@ -4,6 +4,7 @@ from typing import Tuple
 
 import requests
 
+
 class Requester:
     def __init__(self):
         self.url = "https://imdb-api.com/en/API"
@@ -12,7 +13,7 @@ class Requester:
     def get_id_by_phrase(self, phrase: str) -> str:
         response = self._make_request(query="SearchSeries", query_params=phrase)
         best_match = response["results"][0]["id"]
-        return best_match 
+        return best_match
 
     def get_title_data(self, title_id: str) -> Tuple[str, str, str, str]:
         response = self._make_request(query="Title", query_params=title_id)
