@@ -17,9 +17,7 @@ class Requester:
 
     def get_title_data(self, title_id: str) -> Tuple[str, str, str, str]:
         response = self._make_request(query="Title", query_params=title_id)
-        num_seasons = response["tvSeriesInfo"]["seasons"][
-            -1
-        ]  # TODO walidacja dla tvSeriesInfo = none
+        num_seasons = response["tvSeriesInfo"]["seasons"][-1]
         full_title = response["fullTitle"]
         image = response["image"]
         runtime = response["runtimeMins"]
