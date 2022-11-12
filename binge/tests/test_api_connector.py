@@ -1,11 +1,9 @@
 from unittest.mock import patch
 
 from binge.app.api_connector import Requester
-from binge.tests.testing_responses import (
-    SearchSeries_response,
-    SeasonEpisodes_response,
-    Title_response,
-)
+from binge.tests.testing_responses import (SearchSeries_response,
+                                           SeasonEpisodes_response,
+                                           Title_response)
 
 
 @patch("requests.get")
