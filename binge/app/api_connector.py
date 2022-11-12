@@ -1,4 +1,5 @@
 import os
+import json
 from ast import literal_eval
 from typing import Tuple
 
@@ -17,11 +18,16 @@ class Requester:
 
     def get_title_data(self, title_id: str) -> Tuple[str, str, str, str]:
         response = self._make_request(query="Title", query_params=title_id)
-        num_seasons = response["tvSeriesInfo"]["seasons"][-1]
+        seasons_data = response["tvSeriesInfo"]
         full_title = response["fullTitle"]
         image = response["image"]
         runtime = response["runtimeMins"]
-        return num_seasons, full_title, image, runtime
+        if seasons_data:
+            num_seasons = seasons_data["seasons"][-1]
+            return num_seasons, full_title, image, runtime
+        else:
+            num_seasons = None
+            return num_seasons, full_title, image, runtime
 
     def get_title_duration(self, title_id: str, num_seasons: int):
         season = 1
@@ -44,4 +50,8 @@ class Requester:
         path = f"{self.url}/{query}/{self.api_key}/{query_params}"
         response = requests.get(path)
         assert response.status_code == 200
-        return literal_eval(response.text)
+        try:
+            return literal_eval(response.text) #only for testing
+        except ValueError:
+            return json.loads(response.text)
+
