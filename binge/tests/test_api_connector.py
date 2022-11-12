@@ -31,8 +31,14 @@ def test_get_title_data():
         )
 
 
-def test_get_title_duration():
-    pass
+@patch("binge.app.api_connector.Requester.get_season_duration")
+def test_get_title_duration(get_season_duration):
+    mocked_request.return_value.text = str(SeasonEpisodes_response)
+    mocked_request.return_value.status_code = 200
+    get_season_duration.return_value = 60
+    requester = Requester()
+    result = requester.get_title_duration(title_id="tt0411008", num_seasons=2)
+    assert result == 120
 
 
 @patch("requests.get")
@@ -55,7 +61,7 @@ def test_make_request():
         assert result == {"test": "data"}
 
 
-def test_make_request_with_api_error():
+def test_make_request_rises_error_with_bad_request():
     with patch("requests.get") as mocked_request:
         mocked_request.return_value.status_code = 404
         requester = Requester()
