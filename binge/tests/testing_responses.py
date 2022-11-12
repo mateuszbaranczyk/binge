@@ -41,7 +41,7 @@ Title_response = {
     "fullTitle": "Lost (TV Series 2004–2010)",
     "type": "TVSeries",
     "year": "2004",
-    "image": "https://m.media-amazon.com/images/M/MV5BNzhlY2E5NDUtYjJjYy00ODg3LWFkZWQtYTVmMzU4ZWZmOWJkXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_Ratio0.6762_AL_.jpg",
+    "image": "https://aws.com/img/gole_baby.jpg",
     "releaseDate": "2004-09-22",
     "runtimeMins": "30",
     "runtimeStr": "null",
