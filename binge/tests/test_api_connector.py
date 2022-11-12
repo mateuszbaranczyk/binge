@@ -1,11 +1,9 @@
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 from binge.app.api_connector import Requester
-from binge.tests.testing_responses import (
-    SearchSeries_response,
-    Title_response,
-    SeasonEpisodes_response,
-)
+from binge.tests.testing_responses import (SearchSeries_response,
+                                           SeasonEpisodes_response,
+                                           Title_response)
 
 
 def test_get_id_by_phrase():
@@ -33,8 +31,6 @@ def test_get_title_data():
 
 @patch("binge.app.api_connector.Requester.get_season_duration")
 def test_get_title_duration(get_season_duration):
-    mocked_request.return_value.text = str(SeasonEpisodes_response)
-    mocked_request.return_value.status_code = 200
     get_season_duration.return_value = 60
     requester = Requester()
     result = requester.get_title_duration(title_id="tt0411008", num_seasons=2)
