@@ -43,7 +43,7 @@ Title_response = {
     "year": "2004",
     "image": "https://m.media-amazon.com/images/M/MV5BNzhlY2E5NDUtYjJjYy00ODg3LWFkZWQtYTVmMzU4ZWZmOWJkXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_Ratio0.6762_AL_.jpg",
     "releaseDate": "2004-09-22",
-    "runtimeMins": "null",
+    "runtimeMins": "30",
     "runtimeStr": "null",
     "plot": "The survivors of a plane crash are forced to work together in order to survive on a seemingly deserted tropical island.",
     "plotLocal": "",
@@ -301,4 +301,39 @@ Title_response = {
     },
     "tvEpisodeInfo": "null",
     "errorMessage": "null",
+}
+
+SeasonEpisodes_response = {
+    "imDbId": "tt0411008",
+    "title": "Lost",
+    "fullTitle": "Lost (TV Series 2004–2010)",
+    "type": "TVSeries",
+    "year": "2004",
+    "episodes": [
+        {
+            "id": "tt0636289",
+            "seasonNumber": "1",
+            "episodeNumber": "1",
+            "title": "Pilot: Part 1",
+            "image": "https://m.media-amazon.com/images/M/MV5BNDY5MDY4NDEtMTFhOS00NmM5LWE4MDAtMGEyMWFiYWMyNDY4XkEyXkFqcGdeQXVyNTY1MDAxMzc@._V1_Ratio1.7778_AL_.jpg",
+            "year": "2004",
+            "released": "22 Sep. 2004",
+            "plot": "Forty-eight survivors of an airline flight originating from Australia, bound for the U.S., which crash-lands onto an unknown island 1000 miles off course, struggle to figure out a way to survive while trying to find a way to be rescued.",
+            "imDbRating": "9.2",
+            "imDbRatingCount": "11376",
+        },
+        {
+            "id": "tt0636290",
+            "seasonNumber": "1",
+            "episodeNumber": "2",
+            "title": "Pilot: Part 2",
+            "image": "https://m.media-amazon.com/images/M/MV5BZmJhNjY2MTMtNDhkNy00MGZiLWFmOGEtMGIyYWVhOWUzOGUxXkEyXkFqcGdeQXVyNTY1MDAxMzc@._V1_Ratio1.7778_AL_.jpg",
+            "year": "2004",
+            "released": "29 Sep. 2004",
+            "plot": "Having retrieved the plane tranceiver, a group of survivors try to transmit a signal, only to receive a strange transmission from another inhabitant.",
+            "imDbRating": "9.1",
+            "imDbRatingCount": "8648",
+        },
+    ],
+    "errorMessage": "",
 }

@@ -1,7 +1,11 @@
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 
 from binge.app.api_connector import Requester
-from binge.tests.testing_responses import SearchSeries_response, Title_response
+from binge.tests.testing_responses import (
+    SearchSeries_response,
+    Title_response,
+    SeasonEpisodes_response,
+)
 
 
 def test_get_id_by_phrase():
@@ -31,13 +35,15 @@ def test_get_title_duration():
     pass
 
 
-def test_get_season_duration():
-    with patch("requests.get") as mocked_request:
-        mocked_request.return_value.text = str(Title_response)
-        mocked_request.return_value.status_code = 200
-        requester = Requester()
-        result = requester.get_season_duration(title_id="tt0411008", season_number=1)
-        # https://imdb-api.com/api
+@patch("requests.get")
+@patch("binge.app.api_connector.Requester.get_title_data")
+def test_get_season_duration(get_title_data, mocked_request):
+    mocked_request.return_value.text = str(SeasonEpisodes_response)
+    mocked_request.return_value.status_code = 200
+    get_title_data.return_value = ("3", "full_title", "image", "30")
+    requester = Requester()
+    result = requester.get_season_duration(title_id="tt0411008", season_number=1)
+    assert result == 60
 
 
 def test_make_request():
