@@ -337,3 +337,23 @@ SeasonEpisodes_response = {
     ],
     "errorMessage": "",
 }
+
+Title_response_without_seasons = {
+    "fullTitle": "fullTitle",
+    "image": "image",
+    "runtimeMins": "30",
+    "tvSeriesInfo": None,
+}
+
+standard_result = (
+    "6",
+    "Lost (TV Series 2004–2010)",
+    "https://aws.com/img/gole_baby.jpg",
+    "30",
+)
+result_without_seasons = (
+    "",
+    "fullTitle",
+    "image",
+    "30",
+)

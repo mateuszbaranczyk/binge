@@ -1,9 +1,17 @@
 from unittest.mock import patch
 
 from binge.app.api_connector import Requester
-from binge.tests.testing_responses import (SearchSeries_response,
-                                           SeasonEpisodes_response,
-                                           Title_response)
+from binge.tests.testing_responses import (
+    SearchSeries_response,
+    SeasonEpisodes_response,
+    Title_response,
+    Title_response_without_seasons,
+    standard_result,
+    result_without_seasons,
+)
+
+
+import pytest
 
 
 @patch("requests.get")
@@ -15,18 +23,26 @@ def test_get_id_by_phrase(mocked_request):
     assert result == "tt0411008"
 
 
+@pytest.mark.parametrize(
+    "input,expected_result",
+    [
+        (
+            Title_response,
+            standard_result,
+        ),
+        (
+            Title_response_without_seasons,
+            result_without_seasons,
+        ),
+    ],
+)
 @patch("requests.get")
-def test_get_title_data(mocked_request):
-    mocked_request.return_value.text = str(Title_response)
+def test_get_title_data(mocked_request, input, expected_result):
+    mocked_request.return_value.text = str(input)
     mocked_request.return_value.status_code = 200
     requester = Requester()
     result = requester.get_title_data("tt0411008")
-    assert result == (
-        "6",
-        "Lost (TV Series 2004–2010)",
-        "https://aws.com/img/gole_baby.jpg",
-        "30",
-    )
+    assert result == expected_result
 
 
 @patch("binge.app.api_connector.Requester.get_season_duration")
@@ -65,3 +81,12 @@ def test_make_request_rises_error_with_bad_request(mocked_request):
         result = requester._make_request("query", "query_params")  # noqa: F841
     except AssertionError:
         pass
+
+
+@pytest.mark.skip(reason="limited acces to api")
+def test_requester():
+    requester = Requester()
+    title_id = requester.get_id_by_phrase("House of the Dragon")
+    title_data = requester.get_title_data(title_id)
+    title_duration = requester.get_title_duration(title_id, int(title_data[0]))
+    assert title_duration == 615
