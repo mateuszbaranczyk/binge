@@ -17,14 +17,19 @@ class Requester:
 
     def get_title_data(self, title_id: str) -> Tuple[str, str, str, str]:
         response = self._make_request(query="Title", query_params=title_id)
-        num_seasons = response["tvSeriesInfo"]["seasons"][-1]
+        num_seasons = response["tvSeriesInfo"]["seasons"][-1] #TODO walidacja dla tvSeriesInfo = none
         full_title = response["fullTitle"]
         image = response["image"]
         runtime = response["runtimeMins"]
         return num_seasons, full_title, image, runtime
 
     def get_title_duration(self, title_id: str, num_seasons: int):
-        pass
+        season = 1
+        seasons_duration = []
+        while season <= num_seasons:
+            seasons_duration.append(self.get_season_duration(title_id, season))
+            season += 1
+        return sum(seasons_duration)
 
     def get_season_duration(self, title_id: str, season_number: int) -> int:
         response = self._make_request(
