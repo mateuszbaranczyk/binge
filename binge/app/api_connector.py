@@ -1,5 +1,5 @@
-import os
 import json
+import os
 from ast import literal_eval
 from typing import Tuple
 
@@ -49,6 +49,6 @@ class Requester:
         response = requests.get(path)
         assert response.status_code == 200
         try:
-            return literal_eval(response.text) #only for testing
-        except ValueError:                     #TODO fix testing resources
+            return literal_eval(response.text)  # only for testing
+        except ValueError:  # TODO fix testing resources
             return json.loads(response.text)
