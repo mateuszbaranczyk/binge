@@ -26,8 +26,14 @@ class Requester:
     def get_title_duration(self, title_id: str, num_seasons: int):
         pass
 
-    def get_season_duration(self, title_id: str, season_number: int):
-        pass
+    def get_season_duration(self, title_id: str, season_number: int) -> int:
+        response = self._make_request(
+            query="SeasonEpisodes", query_params=f"{title_id}/{season_number}"
+        )
+        episodes_id = [episode["id"] for episode in response["episodes"]]
+        runtimes = [self.get_title_data(episode)[-1] for episode in episodes_id]
+        runtimes = [int(episode_runtime) for episode_runtime in runtimes]
+        return sum(runtimes)
 
     def _make_request(self, query: str, query_params: str) -> dict:
         path = f"{self.url}/{query}/{self.api_key}/{query_params}"
