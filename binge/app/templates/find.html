@@ -6,10 +6,12 @@
     <p class="h1">Find the title!</p>
     <form method="get">
         {{ form.hidden_tag() }}
-            
-            {{ form.title}}
-            {{ form.submit}}
-
+            <div class="form-group fields">
+                {{ form.title(class="form-control field")}}
+            </div>
+            <div class="form-group btn">
+                {{ form.submit(class="btn btn-outline-info button")}}
+            </div>
     </form>
 </div>
 {% endblock %}
