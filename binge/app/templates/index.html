@@ -13,8 +13,7 @@
     
 
     <!-- Bootstrap core CSS -->
-<link href="static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
+<link href="{{ url_for('static', filename='/assets/dist/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -34,7 +33,7 @@
 
     
     <!-- Custom styles for this template -->
-    <link href="static/cover.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='cover.css')}}" rel="stylesheet">
   </head>
   <body class="d-flex h-100 text-center text-white bg-dark">
     
