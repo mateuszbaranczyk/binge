@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block content%}
+
+<div class=finder>
+    <p class="h1">Find the title!</p>
+    <form method="get">
+        <input type="text" class="form-control" id="Title" placeholder="Teletubbies" required="" value={{ request.form['title'] }}> 
+        <button class="w-100 btn btn-primary btn-lg" type="submit">Fint it!</button>
+    </form>
+</div>
+{% endblock %}
