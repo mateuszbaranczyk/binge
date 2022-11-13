@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
 from api_connector import Requester
+from flask import Flask, flash, redirect, render_template, request, url_for
 from forms import QueryForm
 
 app = Flask(__name__)
@@ -14,6 +14,7 @@ def main_page():
         title = form.title.data
         return redirect(url_for("title_page", title=title))
     return render_template("find.html", form=form)
+
 
 @app.route("/about", methods=["GET"])
 def about():
