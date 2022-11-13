@@ -22,7 +22,7 @@ def about():
 
 @app.route("/title", methods=["GET", "POST"])
 def title_page():
-    title = request.args.get("title")
+    # title = request.args.get("title")
     # title_id = requester.get_id_by_phrase(phrase=title)
     # response = requester.get_title_data(title_id)
     response = (
