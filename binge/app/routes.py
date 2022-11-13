@@ -1,15 +1,18 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 from api_connector import Requester
 
 app = Flask(__name__)
 requester = Requester()
 
 
-
 @app.route("/")
 def main_page():
-    return render_template("index.html")
+    # title = request.form['title']
 
-@app.route("/<title>")
-def show_title_page(title: str):
-    pass
+    return render_template("find.html")
+
+@app.route("/title/<title>")
+def title_page(title):
+
+    return render_template("title.html", title=title)
+
