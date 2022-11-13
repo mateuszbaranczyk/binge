@@ -18,4 +18,8 @@ def main_page():
 
 @app.route('/title', methods=['GET', 'POST'])
 def title_page():
-    return render_template("title.html")
+    title = request.args.get('title')
+    atributes = {"title": title}
+    return render_template("title.html", atributes=atributes)
+
+
