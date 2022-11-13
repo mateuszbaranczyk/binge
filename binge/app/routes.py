@@ -15,6 +15,10 @@ def main_page():
         return redirect(url_for("title_page", title=title))
     return render_template("find.html", form=form)
 
+@app.route("/about", methods=["GET"])
+def about():
+    return render_template("about.html")
+
 
 @app.route("/title", methods=["GET", "POST"])
 def title_page():
