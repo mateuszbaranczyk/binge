@@ -33,7 +33,7 @@ jobs:
       - name: Lint by black
         run: |
           source .venv/bin/activate
-          black . --check
+          black ./binge/ --check
       - name: Lint by flake8
         run: |
           source .venv/bin/activate
@@ -41,8 +41,8 @@ jobs:
       - name: Check imports
         run: |
           source .venv/bin/activate
-          isort --check-only
+          isort ./binge/ --check-only
       - name: Run tests
         run: |
           source .venv/bin/activate
-          pytest --cov .
+          pytest --cov ./binge/tests
