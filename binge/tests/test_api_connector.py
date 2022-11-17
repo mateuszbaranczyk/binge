@@ -2,6 +2,7 @@ from unittest.mock import patch
 
 import pytest
 
+#black/isort conflict
 # fmt: off
 from binge.app.api_connector import Requester
 from binge.tests.testing_responses import (SearchSeries_response,
