@@ -3,14 +3,12 @@ from unittest.mock import patch
 import pytest
 
 from binge.app.api_connector import Requester
-from binge.tests.testing_responses import (
-    SearchSeries_response,
-    SeasonEpisodes_response,
-    Title_response,
-    Title_response_without_seasons,
-    result_without_seasons,
-    standard_result,
-)
+from binge.tests.testing_responses import (SearchSeries_response,
+                                           SeasonEpisodes_response,
+                                           Title_response,
+                                           Title_response_without_seasons,
+                                           result_without_seasons,
+                                           standard_result)
 
 
 @patch("requests.get")
