@@ -2,6 +2,8 @@ from unittest.mock import patch
 
 import pytest
 
+#black/isort conflict
+# fmt: off
 from binge.app.api_connector import Requester
 from binge.tests.testing_responses import (SearchSeries_response,
                                            SeasonEpisodes_response,
@@ -9,6 +11,8 @@ from binge.tests.testing_responses import (SearchSeries_response,
                                            Title_response_without_seasons,
                                            result_without_seasons,
                                            standard_result)
+
+# fmt: on
 
 
 @patch("requests.get")
