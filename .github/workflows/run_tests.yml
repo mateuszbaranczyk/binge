@@ -33,7 +33,7 @@ jobs:
       - name: Lint by black
         run: |
           source .venv/bin/activate
-          black .
+          black . --check
       - name: Run tests
         run: |
           source .venv/bin/activate
