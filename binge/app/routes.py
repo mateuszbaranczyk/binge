@@ -12,6 +12,7 @@ fake_data = (
     "https://m.media-amazon.com/images/M/MV5BYTRiNDQwYzAtMzVlZS00NTI5LWJjYjUtMzkwNTUzMWMxZTllXkEyXkFqcGdeQXVyNDIzMzcwNjc@._V1_Ratio0.7331_AL_.jpg",
     None,
 )
+fake_duration = 20000
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -29,6 +30,8 @@ def title_page():
     # title = request.args.get("title")
     # title_id = requester.get_id_by_phrase(phrase=title)
     # response = requester.get_title_data(title_id)
+    # title_duration = requester.get_title_duration(title_id)
+    title_duration = fake_duration
 
     title_data = {
         "title": fake_data[1],
@@ -39,16 +42,23 @@ def title_page():
     if form.validate_on_submit():
         peroid = form.peroid.data
         duration = form.duration.data
-        return redirect(url_for("answer", peroid=peroid, duration=duration))
+        message = _check_if_can_it_binge(int(peroid), int(duration), title_duration)
+        return redirect(url_for("answer", message=message))
     return render_template("title.html", title_data=title_data, form=form)
+
+
+def _check_if_can_it_binge(peroid: int, duration: int, title_duration: int) -> str:
+    time_to_binge = duration * peroid
+    if title_duration > time_to_binge:
+        return "No!"
+    else:
+        return "Yes!"
 
 
 @app.route("/answer", methods=["GET", "POST"])
 def answer():
-    peroid = request.args.get("peroid")
-    duration = request.args.get("duration")
-
-    return render_template("answer.html", peroid=peroid, duration=duration)
+    message = request.args.get("message")
+    return render_template("answer.html", message=message)
 
 
 @app.route("/about", methods=["GET"])

@@ -16,5 +16,9 @@ class PeroidForm(FlaskForm):
         render_kw={"placeholder": "7"},
         default="7",
     )
-    peroid = SelectField("Peroid", choices=["days", "weeks", "months"], default="days")
+    peroid = SelectField(
+        "Peroid",
+        choices=[(1440, "days"), (1440 * 7, "weeks"), (1440 * 30, "months")],
+        default="days",
+    )
     go = SubmitField()
