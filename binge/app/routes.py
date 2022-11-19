@@ -1,9 +1,10 @@
 from api_connector import Requester
 from flask import Flask, redirect, render_template, request, url_for
 from forms import PeroidForm, QueryForm
+import os 
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "twojastara"
+app.config["SECRET_KEY"] = os.getenv("FLASK_SECRET_KEY")
 requester = Requester()
 
 fake_data = (
@@ -21,7 +22,7 @@ def main_page():
     if form.validate_on_submit():
         title = form.title.data
         return redirect(url_for("title_page", title=title))
-    return render_template("find.html", form=form)
+    return render_template("home.html", form=form)
 
 
 @app.route("/title", methods=["GET", "POST"])
@@ -42,17 +43,17 @@ def title_page():
     if form.validate_on_submit():
         peroid = form.peroid.data
         duration = form.duration.data
-        message = _check_if_can_it_binge(int(peroid), int(duration), title_duration)
+        message = _check_if_can_be_binged(int(peroid), int(duration), title_duration)
         return redirect(url_for("answer", message=message))
     return render_template("title.html", title_data=title_data, form=form)
 
 
-def _check_if_can_it_binge(peroid: int, duration: int, title_duration: int) -> str:
+def _check_if_can_be_binged(peroid: int, duration: int, title_duration: int) -> str:
     time_to_binge = duration * peroid
     if title_duration > time_to_binge:
-        return "No!"
+        return "It's impossible!"
     else:
-        return "Yes!"
+        return "Go ahead, you can make it!"
 
 
 @app.route("/answer", methods=["GET", "POST"])

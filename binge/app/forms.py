@@ -10,6 +10,8 @@ class QueryForm(FlaskForm):
 
 
 class PeroidForm(FlaskForm):
+    minutes_in_day = 1440
+
     duration = StringField(
         "Requested duration",
         validators=[DataRequired()],
@@ -18,7 +20,11 @@ class PeroidForm(FlaskForm):
     )
     peroid = SelectField(
         "Peroid",
-        choices=[(1440, "days"), (1440 * 7, "weeks"), (1440 * 30, "months")],
+        choices=[
+            (minutes_in_day, "days"),
+            (minutes_in_day * 7, "weeks"),
+            (minutes_in_day * 30, "months"),
+        ],
         default="days",
     )
     go = SubmitField()
