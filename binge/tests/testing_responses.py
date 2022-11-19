@@ -350,10 +350,14 @@ standard_result = {
     "title": "Lost (TV Series 2004–2010)",
     "image": "https://aws.com/img/gole_baby.jpg",
     "duration": "30",
+    "id": "tt0411008",
+    "description": "The survivors of a plane crash are forced to work together in order to survive on a seemingly deserted tropical island."
 }
 result_without_seasons = {
     "seasons": "",
     "title": "fullTitle",
     "image": "image",
     "duration": "30",
+    "id": "tt0411008",
+    "description": "The survivors of a plane crash are forced to work together in order to survive on a seemingly deserted tropical island.",
 }
