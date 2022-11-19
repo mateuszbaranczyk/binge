@@ -130,4 +130,3 @@ dmypy.json
 
 /binge-env
 .vscode/
-/flask_session/
