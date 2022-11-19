@@ -1,17 +1,20 @@
-from api_connector import Requester
-from flask import Flask, redirect, render_template, request, url_for, session
-from flask_session import Session
-from forms import PeroidForm, QueryForm
 import os
 
+from api_connector import Requester
+from flask import Flask, redirect, render_template, request, session, url_for
+from forms import PeroidForm, QueryForm
+
+from flask_session import Session
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("FLASK_SECRET_KEY")
-requester = Requester()
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
+
+requester = Requester()
+
 
 fake_data = {
     "title": "Game of Thrones (TV Series 2011–2019)",
@@ -45,7 +48,9 @@ def title_page():
         title_duration = fake_duration
         peroid = form.peroid.data
         duration = form.duration.data
-        session["message"] = _check_if_can_be_binged(int(peroid), int(duration), title_duration)
+        session["message"] = _check_if_can_be_binged(
+            int(peroid), int(duration), title_duration
+        )
         return redirect(url_for("answer"))
     return render_template("title.html", form=form)
 
