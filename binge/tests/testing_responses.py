@@ -343,6 +343,8 @@ Title_response_without_seasons = {
     "image": "image",
     "runtimeMins": "30",
     "tvSeriesInfo": None,
+    "plot": "plot",
+    "id": "id"
 }
 
 standard_result = {
@@ -358,6 +360,6 @@ result_without_seasons = {
     "title": "fullTitle",
     "image": "image",
     "duration": "30",
-    "id": "tt0411008",
-    "description": "The survivors of a plane crash are forced to work together in order to survive on a seemingly deserted tropical island.",
+    "id": "id",
+    "description": "plot",
 }
