@@ -6,13 +6,13 @@
     <div class="card">
       <div class="row g-0">
         <div class="col-md-4">
-            <img src="{{ title_data.image }}" alt="{{ url_for('static', filename='placeholder.jpg') }}" width="200" height="300">
+            <img src="{{ session.title_data.image }}" alt="{{ url_for('static', filename='placeholder.jpg') }}" width="200" height="300">
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="float-md-start mb-0 text-muted">{{ title_data.title }}</h5>
-            <p class="card-text text-muted">{{ title_data.description }}</p>
-            <p class="card-text"><small class="text-muted">Sesons: {{ title_data.seasons }}</small></p>
+            <h5 class="float-md-start mb-0 text-muted">{{ session.title_data.title }}</h5>
+            <p class="card-text text-muted">{{ session.title_data.description }}</p>
+            <p class="card-text"><small class="text-muted">Sesons: {{ session.title_data.seasons }}</small></p>
           </div>
         </div>
       </div>
