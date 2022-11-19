@@ -17,15 +17,14 @@ class Requester:
         return best_match
 
     def get_title_data(self, title_id: str) -> Tuple[str, str, str, str]:
-        num_seasons = ""
         response = self._make_request(query="Title", query_params=title_id)
         seasons_data = response["tvSeriesInfo"]
-        full_title = response["fullTitle"]
-        image = response["image"]
-        runtime = response["runtimeMins"]
-        if seasons_data:
-            num_seasons = seasons_data["seasons"][-1]
-        return num_seasons, full_title, image, runtime
+        return {
+            "seasons": seasons_data["seasons"][-1] if seasons_data else "",
+            "title": response["fullTitle"],
+            "image": response["image"],
+            "duration": response["runtimeMins"],
+        }
 
     def get_title_duration(self, title_id: str, num_seasons: int):
         season = 1
