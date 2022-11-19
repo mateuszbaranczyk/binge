@@ -345,15 +345,15 @@ Title_response_without_seasons = {
     "tvSeriesInfo": None,
 }
 
-standard_result = (
-    "6",
-    "Lost (TV Series 2004–2010)",
-    "https://aws.com/img/gole_baby.jpg",
-    "30",
-)
-result_without_seasons = (
-    "",
-    "fullTitle",
-    "image",
-    "30",
-)
+standard_result = {
+    "seasons": "6",
+    "title": "Lost (TV Series 2004–2010)",
+    "image": "https://aws.com/img/gole_baby.jpg",
+    "duration": "30",
+}
+result_without_seasons = {
+    "seasons": "",
+    "title": "fullTitle",
+    "image": "image",
+    "duration": "30",
+}
