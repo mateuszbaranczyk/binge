@@ -1,14 +1,8 @@
-import os
-
 from api_connector import Requester
-from flask import Flask, redirect, render_template, request, session, url_for
+from flask import redirect, render_template, session, url_for
 from forms import PeroidForm, QueryForm
-
-from flask_session import Session
-
 from run import app
 
-Session(app)
 requester = Requester()
 
 

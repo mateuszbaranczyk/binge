@@ -25,7 +25,7 @@ class Requester:
             "image": response["image"],
             "duration": response["runtimeMins"],
             "id": response["id"],
-            "description": response["plot"]
+            "description": response["plot"],
         }
 
     def get_title_duration(self, title_id: str, num_seasons: int):

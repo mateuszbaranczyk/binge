@@ -344,7 +344,7 @@ Title_response_without_seasons = {
     "runtimeMins": "30",
     "tvSeriesInfo": None,
     "plot": "plot",
-    "id": "id"
+    "id": "id",
 }
 
 standard_result = {
@@ -353,7 +353,7 @@ standard_result = {
     "image": "https://aws.com/img/gole_baby.jpg",
     "duration": "30",
     "id": "tt0411008",
-    "description": "The survivors of a plane crash are forced to work together in order to survive on a seemingly deserted tropical island."
+    "description": "The survivors of a plane crash are forced to work together in order to survive on a seemingly deserted tropical island.",
 }
 result_without_seasons = {
     "seasons": "",
