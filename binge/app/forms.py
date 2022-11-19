@@ -7,6 +7,7 @@ class QueryForm(FlaskForm):
     title = StringField(
         "Title", validators=[DataRequired()], render_kw={"placeholder": "Teletubbies"}
     )
+    find_it = SubmitField()
 
 
 class PeroidForm(FlaskForm):
