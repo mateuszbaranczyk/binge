@@ -1,9 +1,7 @@
-from api_connector import Requester
+from api_connector import requester
 from flask import redirect, render_template, session, url_for
 from forms import PeroidForm, QueryForm
 from run import app
-
-requester = Requester()
 
 
 fake_data = {
