@@ -4,8 +4,8 @@ import pytest
 
 # black/isort conflict
 # fmt: off
-from binge.app.api_connector import Requester
-from binge.tests.testing_responses import (SearchSeries_response,
+from binge.api_connector import Requester
+from tests.testing_responses import (SearchSeries_response,
                                            SeasonEpisodes_response,
                                            Title_response,
                                            Title_response_without_seasons,
