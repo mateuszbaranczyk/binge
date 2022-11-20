@@ -1,10 +1,11 @@
 from api_connector import requester
-from flask import redirect, render_template, session, url_for
+from flask import redirect, render_template, session, url_for, Blueprint
 from forms import PeroidForm, QueryForm
 from run import app
 
+bp = Blueprint("binge", __name__)
 
-@app.route("/", methods=["GET", "POST"])
+@bp.route("/", methods=["GET", "POST"])
 def main_page():
     form = QueryForm()
     if form.validate_on_submit():
@@ -16,7 +17,7 @@ def main_page():
     return render_template("home.html", form=form)
 
 
-@app.route("/title", methods=["GET", "POST"])
+@bp.route("/title", methods=["GET", "POST"])
 def title_page():
     form = PeroidForm()
     title_data = session.get("title_data")
@@ -40,11 +41,11 @@ def _check_if_can_be_binged(peroid: int, duration: int, title_duration: int) -> 
         return "Go ahead, you can make it!"
 
 
-@app.route("/answer", methods=["GET", "POST"])
+@bp.route("/answer", methods=["GET", "POST"])
 def answer():
     return render_template("answer.html")
 
 
-@app.route("/about", methods=["GET"])
+@bp.route("/about", methods=["GET"])
 def about():
     return render_template("about.html")
