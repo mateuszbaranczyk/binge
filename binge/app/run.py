@@ -14,4 +14,4 @@ Session(app)
 import routes  # noqa: F401, E402
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=6000)
