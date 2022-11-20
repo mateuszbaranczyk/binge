@@ -363,3 +363,14 @@ result_without_seasons = {
     "id": "id",
     "description": "plot",
 }
+
+
+fake_data = {
+    "title": "Game of Thrones (TV Series 2011–2019)",
+    "image": "https://m.media-amazon.com/images/M/MV5BYTRiNDQwYzAtMzVlZS00NTI5LWJjYjUtMzkwNTUzMWMxZTllXkEyXkFqcGdeQXVyNDIzMzcwNjc@._V1_Ratio0.7331_AL_.jpg",
+    "description": "desc",
+    "seasons": "8",
+    "id": "id",
+}
+
+fake_duration = 20000

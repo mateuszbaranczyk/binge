@@ -54,6 +54,6 @@ class Requester:
         except ValueError:  # TODO fix testing resources
             return json.loads(response.text)
 
+
 if __name__ == "api_connector":
     requester = Requester()
-    
