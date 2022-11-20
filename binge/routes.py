@@ -2,7 +2,6 @@ from flask import Blueprint, redirect, render_template, session, url_for
 
 from binge.api_connector import requester
 from binge.forms import PeroidForm, QueryForm
-from flask_session import Session
 
 bp = Blueprint("routes", __name__)
 
