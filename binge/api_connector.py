@@ -55,5 +55,5 @@ class Requester:
             return json.loads(response.text)
 
 
-if __name__ == "api_connector":
+if __name__ == "binge.api_connector":
     requester = Requester()
