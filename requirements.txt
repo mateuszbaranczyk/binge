@@ -1,6 +1,0 @@
-flask
-black
-flake8
-isort 
-requests
-pytest

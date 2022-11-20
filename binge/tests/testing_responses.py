@@ -343,17 +343,34 @@ Title_response_without_seasons = {
     "image": "image",
     "runtimeMins": "30",
     "tvSeriesInfo": None,
+    "plot": "plot",
+    "id": "id",
 }
 
-standard_result = (
-    "6",
-    "Lost (TV Series 2004–2010)",
-    "https://aws.com/img/gole_baby.jpg",
-    "30",
-)
-result_without_seasons = (
-    "",
-    "fullTitle",
-    "image",
-    "30",
-)
+standard_result = {
+    "seasons": "6",
+    "title": "Lost (TV Series 2004–2010)",
+    "image": "https://aws.com/img/gole_baby.jpg",
+    "duration": "30",
+    "id": "tt0411008",
+    "description": "The survivors of a plane crash are forced to work together in order to survive on a seemingly deserted tropical island.",
+}
+result_without_seasons = {
+    "seasons": "",
+    "title": "fullTitle",
+    "image": "image",
+    "duration": "30",
+    "id": "id",
+    "description": "plot",
+}
+
+
+fake_data = {
+    "title": "Game of Thrones (TV Series 2011–2019)",
+    "image": "https://m.media-amazon.com/images/M/MV5BYTRiNDQwYzAtMzVlZS00NTI5LWJjYjUtMzkwNTUzMWMxZTllXkEyXkFqcGdeQXVyNDIzMzcwNjc@._V1_Ratio0.7331_AL_.jpg",
+    "description": "desc",
+    "seasons": "8",
+    "id": "id",
+}
+
+fake_duration = 20000
