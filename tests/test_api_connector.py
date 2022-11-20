@@ -6,11 +6,9 @@ import pytest
 # fmt: off
 from binge.api_connector import Requester
 from tests.testing_responses import (SearchSeries_response,
-                                           SeasonEpisodes_response,
-                                           Title_response,
-                                           Title_response_without_seasons,
-                                           result_without_seasons,
-                                           standard_result)
+                                     SeasonEpisodes_response, Title_response,
+                                     Title_response_without_seasons,
+                                     result_without_seasons, standard_result)
 
 # fmt: on
 

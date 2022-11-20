@@ -15,7 +15,7 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY=secrets.token_hex(16),
     )
-    
+
     app.config["SESSION_PERMANENT"] = False
     app.config["SESSION_TYPE"] = "filesystem"
     _session = Session()
@@ -34,5 +34,5 @@ def create_app(test_config=None):
     from . import routes
 
     app.register_blueprint(routes.bp)
-    
+
     return app
