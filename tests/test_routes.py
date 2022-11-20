@@ -1,19 +1,11 @@
 from binge import create_app
 
-@pytest.fixture
-def app():
-    app = create_app({
-        'TESTING': True,
-    })
+
+def test_config():
+    assert not create_app().testing
+    assert create_app({'TESTING': True}).testing
 
 
-    yield app
-
-
-
-@pytest.fixture
-def client(app):
-    return app.test_client()
-
-def test_app(client):
-    response = client.get("/")
+def test_hello(client):
+    response = client.get('/hello')
+    assert response.data == b'Hello, World!'
