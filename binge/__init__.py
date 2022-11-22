@@ -1,3 +1,5 @@
+# !/bin/python3
+# isort: skip_file
 import os
 import secrets
 
@@ -31,7 +33,7 @@ def create_app(test_config=None):
     except OSError as err:
         print(err)
 
-    from . import routes  # isort: skip
+    from . import routes
 
     app.register_blueprint(routes.bp)
 
