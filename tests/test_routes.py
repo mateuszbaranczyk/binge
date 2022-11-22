@@ -1,11 +1,13 @@
 from binge import create_app
 
+# black/isort conflict
+# fmt: off
+from tests.testing_endpoint_responses import home_form_btn, home_form_field
+# fmt: on
 
-def test_config():
-    assert not create_app().testing
-    assert create_app({"TESTING": True}).testing
 
-
-def test_hello(client):
-    response = client.get("/hello")
-    assert response.data == b"Hello, World!"
+def test_render_home_page(client):
+    response = client.get("/")
+    assert b"What series do you want to binge?" in response.data
+    assert home_form_btn in response.data
+    assert home_form_field in response.data
