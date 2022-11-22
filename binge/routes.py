@@ -14,7 +14,7 @@ def main_page():
         title_id = requester.get_id_by_phrase(phrase=title)
         title_data = requester.get_title_data(title_id)
         session["title_data"] = title_data
-        return redirect(url_for("title_page"))
+        return redirect(url_for("routes.title_page"))
     return render_template("home.html", form=form)
 
 
@@ -23,7 +23,7 @@ def title_page():
     form = PeroidForm()
     title_data = session.get("title_data")
     if form.validate_on_submit():
-        title_duration = requester.get_title_duration(title_data["id"])
+        title_duration = requester.get_title_duration(title_data["id"], int(title_data["seasons"]))
         title_duration = title_duration
         peroid = form.peroid.data
         duration = form.duration.data
@@ -31,7 +31,7 @@ def title_page():
             int(peroid), int(duration), title_duration
         )
         return redirect(url_for("answer"))
-    return render_template("title.html", form=form)
+    return render_template("title.html", form=form, title_data=title_data)
 
 
 def _check_if_can_be_binged(peroid: int, duration: int, title_duration: int) -> str:
@@ -44,7 +44,7 @@ def _check_if_can_be_binged(peroid: int, duration: int, title_duration: int) -> 
 
 @bp.route("/answer", methods=["GET", "POST"])
 def answer():
-    return render_template("answer.html")
+    return render_template("answer.html", message=session["message"])
 
 
 @bp.route("/about", methods=["GET"])
