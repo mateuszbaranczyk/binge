@@ -1,5 +1,6 @@
 from binge import create_app
 
+import pytest 
 
 @pytest.fixture
 def app():

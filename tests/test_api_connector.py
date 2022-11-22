@@ -44,7 +44,7 @@ def test_get_title_data(mocked_request, input, expected_result):
     assert result == expected_result
 
 
-@patch("binge.app.api_connector.Requester.get_season_duration")
+@patch("binge.api_connector.Requester.get_season_duration")
 def test_get_title_duration(get_season_duration):
     get_season_duration.return_value = 60
     requester = Requester()
@@ -53,7 +53,7 @@ def test_get_title_duration(get_season_duration):
 
 
 @patch("requests.get")
-@patch("binge.app.api_connector.Requester.get_title_data")
+@patch("binge.api_connector.Requester.get_title_data")
 def test_get_season_duration(get_title_data, mocked_request):
     mocked_request.return_value.text = str(SeasonEpisodes_response)
     mocked_request.return_value.status_code = 200
