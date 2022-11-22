@@ -31,7 +31,7 @@ def create_app(test_config=None):
     except OSError as err:
         print(err)
 
-    from . import routes
+    from . import routes # isort: skip
 
     app.register_blueprint(routes.bp)
 
