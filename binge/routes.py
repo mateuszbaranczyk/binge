@@ -23,7 +23,9 @@ def title_page():
     form = PeroidForm()
     title_data = session.get("title_data")
     if form.validate_on_submit():
-        title_duration = requester.get_title_duration(title_data["id"], int(title_data["seasons"]))
+        title_duration = requester.get_title_duration(
+            title_data["id"], int(title_data["seasons"])
+        )
         title_duration = title_duration
         peroid = form.peroid.data
         duration = form.duration.data

@@ -1,8 +1,8 @@
 from binge import create_app
-
 # black/isort conflict
 # fmt: off
 from tests.testing_endpoint_responses import home_form_btn, home_form_field
+
 # fmt: on
 
 
