@@ -1,6 +1,5 @@
 from binge import create_app
 from tests.testing_api_responses import title_data
-
 # black/isort conflict
 # fmt: off
 from tests.testing_endpoint_responses import home_form_btn, home_form_field

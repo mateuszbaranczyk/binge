@@ -9,8 +9,7 @@ from tests.testing_api_responses import (SearchSeries_response,
                                          SeasonEpisodes_response,
                                          Title_response,
                                          Title_response_without_seasons,
-                                         result_without_seasons,
-                                         title_data)
+                                         result_without_seasons, title_data)
 
 # fmt: on
 
