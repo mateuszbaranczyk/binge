@@ -23,17 +23,21 @@ def title_page():
     form = PeroidForm()
     title_data = session.get("title_data")
     if form.validate_on_submit():
-        title_duration = requester.get_title_duration(
-            title_data["id"], int(title_data["seasons"])
-        )
-        title_duration = title_duration
-        peroid = form.peroid.data
-        duration = form.duration.data
-        session["message"] = _check_if_can_be_binged(
-            int(peroid), int(duration), title_duration
-        )
-        return redirect(url_for("answer"))
+        _redirect_to_answer_page(form)
     return render_template("title.html", form=form, title_data=title_data)
+
+
+def _redirect_to_answer_page(form):
+    title_duration = requester.get_title_duration(
+        title_data["id"], int(title_data["seasons"])
+    )
+    title_duration = title_duration
+    peroid = form.peroid.data
+    duration = form.duration.data
+    session["message"] = _check_if_can_be_binged(
+        int(peroid), int(duration), title_duration
+    )
+    return redirect(url_for("answer"))
 
 
 def _check_if_can_be_binged(peroid: int, duration: int, title_duration: int) -> str:
