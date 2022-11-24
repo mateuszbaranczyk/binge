@@ -14,9 +14,8 @@ def test_render_home_page(client):
     assert home_form_field in response.data
 
 
-def test_render_title_page(client):
-    with client.session_transaction() as session:
-        session["title_data"] = standard_result
+def test_render_title_page(client, session):
+    session_data =  session("title_data", standard_result)
     response = client.get("/title")
     result = response.data.decode("utf-8")
     assert standard_result["title"] in result
