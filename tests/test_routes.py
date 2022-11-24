@@ -1,6 +1,8 @@
 from binge import create_app
 from tests.testing_api_responses import title_data
 from tests.testing_endpoint_responses import home_form_btn, home_form_field
+from unittest.mock import MagicMock, patch
+from binge.routes import _redirect_to_answer_page, _check_if_can_be_binged
 
 
 def test_render_home_page(client):
@@ -25,14 +27,29 @@ def test_render_anser_page(client, session):
     response = client.get("/answer")
     assert expected_result in response.data.decode("utf-8")
 
-def test_redirect_to_answer_page():
 
-    form = create_form()
+@patch("requester.get_title_duration")
+def test_redirect_to_answer_page(get_title_duration):
+    get_title_duration.return_value = 12
+    form = create_form(peroid="1", duration="24")
+    _redirect_to_answer_page(form)
 
-def _create_form():
+
+def _create_form(peroid: str, duration: str) -> object:
+    form = MagicMock()
+    form.return_value.peroid.data = peroid
+    form.return_value.duration.data = duration
     return form
 
 
-@pytest.mark.parametrize()
-def test__check_if_can_be_binged():
-    pass
+@pytest.mark.parametrize(
+    "peroid, duration, title_duration, expected_result",
+    [
+        (1, 24, 12, "Go ahead, you can make it!"),
+        (1, 24, 24, "Go ahead, you can make it!"),
+        (1, 24, 50, "It's impossible!"),
+    ],
+)
+def test__check_if_can_be_binged(peroid, duration, title_duration, expected_result):
+    result = _check_if_can_be_binged(peroid, duration, title_duration)
+    assert result == expected_result

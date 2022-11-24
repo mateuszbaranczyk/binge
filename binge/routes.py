@@ -34,7 +34,7 @@ def _redirect_to_answer_page(form):
     title_duration = title_duration
     peroid = form.peroid.data
     duration = form.duration.data
-    session["message"] = _check_if_can_be_binged(
+    session["message"] = _check_if_can_be_binged(   
         int(peroid), int(duration), title_duration
     )
     return redirect(url_for("answer"))

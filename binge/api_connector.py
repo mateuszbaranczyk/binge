@@ -28,7 +28,7 @@ class Requester:
             "description": response["plot"],
         }
 
-    def get_title_duration(self, title_id: str, num_seasons: int):
+    def get_title_duration(self, title_id: str, num_seasons: int) -> int:
         season = 1
         seasons_duration = []
         while season <= num_seasons:
