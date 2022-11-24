@@ -15,7 +15,7 @@ def test_render_home_page(client):
 
 
 def test_render_title_page(client, session):
-    session_data =  session("title_data", standard_result)
+    session_data = session("title_data", standard_result)
     response = client.get("/title")
     result = response.data.decode("utf-8")
     assert standard_result["title"] in result
