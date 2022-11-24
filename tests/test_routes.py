@@ -1,10 +1,6 @@
 from binge import create_app
 from tests.testing_api_responses import title_data
-# black/isort conflict
-# fmt: off
 from tests.testing_endpoint_responses import home_form_btn, home_form_field
-
-# fmt: on
 
 
 def test_render_home_page(client):
@@ -28,3 +24,15 @@ def test_render_anser_page(client, session):
     session_data = session("message", expected_result)
     response = client.get("/answer")
     assert expected_result in response.data.decode("utf-8")
+
+def test_redirect_to_answer_page():
+
+    form = create_form()
+
+def _create_form():
+    return form
+
+
+@pytest.mark.parametrize()
+def test__check_if_can_be_binged():
+    pass
