@@ -10,7 +10,7 @@ from tests.testing_api_responses import (SearchSeries_response,
                                          Title_response,
                                          Title_response_without_seasons,
                                          result_without_seasons,
-                                         standard_result)
+                                         title_data)
 
 # fmt: on
 
@@ -29,7 +29,7 @@ def test_get_id_by_phrase(mocked_request):
     [
         (
             Title_response,
-            standard_result,
+            title_data,
         ),
         (
             Title_response_without_seasons,

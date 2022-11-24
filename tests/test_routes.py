@@ -1,5 +1,5 @@
 from binge import create_app
-from tests.testing_api_responses import standard_result
+from tests.testing_api_responses import title_data
 
 # black/isort conflict
 # fmt: off
@@ -16,12 +16,12 @@ def test_render_home_page(client):
 
 
 def test_render_title_page(client, session):
-    session_data = session("title_data", standard_result)
+    session_data = session("title_data", title_data)
     response = client.get("/title")
     result = response.data.decode("utf-8")
-    assert standard_result["title"] in result
-    assert standard_result["image"] in result
-    assert standard_result["description"] in result
+    assert title_data["title"] in result
+    assert title_data["image"] in result
+    assert title_data["description"] in result
 
 
 def test_render_anser_page(client, session):
