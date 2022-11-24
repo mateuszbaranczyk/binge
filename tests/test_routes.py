@@ -1,5 +1,6 @@
 from binge import create_app
 from tests.testing_api_responses import standard_result
+
 # black/isort conflict
 # fmt: off
 from tests.testing_endpoint_responses import home_form_btn, home_form_field
@@ -21,3 +22,10 @@ def test_render_title_page(client, session):
     assert standard_result["title"] in result
     assert standard_result["image"] in result
     assert standard_result["description"] in result
+
+
+def test_render_anser_page(client, session):
+    expected_result = "test msg"
+    session_data = session("message", expected_result)
+    response = client.get("/answer")
+    assert expected_result in response.data.decode("utf-8")
