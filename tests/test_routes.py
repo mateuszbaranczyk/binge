@@ -25,18 +25,21 @@ def test_render_title_page(client, session):
     assert title_data["description"] in result
 
 
-def test_render_anser_page(client, session):
+def test_render_answer_page(client, session):
     expected_result = "test msg"
     session("message", expected_result)
     response = client.get("/answer")
     assert expected_result in response.data.decode("utf-8")
 
 
-@patch("requester.get_title_duration")
-def test_redirect_to_answer_page(get_title_duration):
+@patch("binge.api_connector.requester.get_title_duration")
+def test_redirect_to_answer_page(get_title_duration, app, session):
+    title_data = {"id": "test_id", "seasons": "1"}
+    session("title_data", title_data)
     get_title_duration.return_value = 12
-    form = create_form(peroid="1", duration="24")
-    _redirect_to_answer_page(form)
+    form = _create_form(peroid="1", duration="24")
+    with app.test_request_context("/title", form=PeroidForm(), title_data=title_data):
+        _redirect_to_answer_page(form, title_data)
 
 
 def _create_form(peroid: str, duration: str) -> object:
