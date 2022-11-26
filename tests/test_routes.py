@@ -37,20 +37,19 @@ def test_redirect_to_answer_page(get_title_duration, client, session):
     title_data = {"id": "test_id", "seasons": "1"}
     session(title_data=title_data)
     get_title_duration.return_value = 12
-    form = _create_form(peroid="1", duration="24")
     with client:
         client.get("/title")
+        form = _create_peroid_form(peroid="1", duration="24")
         response = _redirect_to_answer_page(form, title_data)
     assert response.status_code == 302
     assert response.location == "/answer"
 
 
-def _create_form(peroid: str, duration: str) -> object:
-    form = MagicMock()
-    form.peroid.data.return_value = peroid
-    form.duration.data.return_value = duration
-    return form
-
+def _create_peroid_form(peroid: str, duration: str) -> "patched_form":
+    patched_form = MagicMock()
+    patched_form.return_value.peroid.data = peroid
+    patched_form.return_value.duration.data = duration
+    return patched_form
 
 @pytest.mark.parametrize(
     "peroid, duration, title_duration, expected_result",
