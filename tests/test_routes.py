@@ -27,7 +27,7 @@ def test_render_title_page(client, session):
 
 def test_render_anser_page(client, session):
     expected_result = "test msg"
-    session_data = session("message", expected_result)
+    session("message", expected_result)
     response = client.get("/answer")
     assert expected_result in response.data.decode("utf-8")
 
@@ -41,8 +41,8 @@ def test_redirect_to_answer_page(get_title_duration):
 
 def _create_form(peroid: str, duration: str) -> object:
     form = MagicMock()
-    form.return_value.peroid.data = peroid
-    form.return_value.duration.data = duration
+    form.peroid.data.return_value = peroid
+    form.duration.data.return_value = duration
     return form
 
 
