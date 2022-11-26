@@ -4,7 +4,11 @@ import pytest
 
 from binge import create_app
 from binge.forms import PeroidForm
-from binge.routes import _check_if_can_be_binged, _redirect_to_answer_page
+from binge.routes import (
+    _check_if_can_be_binged,
+    _redirect_to_answer_page,
+    _redirect_to_title_page,
+)
 from tests.testing_api_responses import title_data
 from tests.testing_endpoint_responses import home_form_btn, home_form_field
 
@@ -14,6 +18,25 @@ def test_render_home_page(client):
     assert b"What series do you want to binge?" in response.data
     assert home_form_btn in response.data
     assert home_form_field in response.data
+
+
+@patch("binge.api_connector.requester.get_id_by_phrase")
+@patch("binge.api_connector.requester.get_title_data")
+def test_redirect_to_title_page(get_id_by_phrase, get_title_data, client):
+    get_id_by_phrase.return_value = "ID"
+    get_title_data.return_value = title_data
+    with client:
+        client.get("/")
+        form = _create_query_form(title="test")
+        response = _redirect_to_title_page(form=form)
+    assert response.status_code == 302
+    assert response.location == "/title"
+
+
+def _create_query_form(title) -> "patched_form":
+    patched_form = MagicMock()
+    patched_form.return_value.title.data = title
+    return patched_form
 
 
 def test_render_title_page(client, session):
@@ -50,6 +73,7 @@ def _create_peroid_form(peroid: str, duration: str) -> "patched_form":
     patched_form.return_value.peroid.data = peroid
     patched_form.return_value.duration.data = duration
     return patched_form
+
 
 @pytest.mark.parametrize(
     "peroid, duration, title_duration, expected_result",
