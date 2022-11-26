@@ -10,12 +10,15 @@ bp = Blueprint("routes", __name__)
 def main_page():
     form = QueryForm()
     if form.validate_on_submit():
-        title = form.title.data
-        title_id = requester.get_id_by_phrase(phrase=title)
-        title_data = requester.get_title_data(title_id)
-        session["title_data"] = title_data
-        return redirect(url_for("routes.title_page"))
+        _redirect_to_title_page(form=form)
     return render_template("home.html", form=form)
+
+
+def _redirect_to_title_page(form: QueryForm) -> "redirect":
+    title = form.title.data
+    title_id = requester.get_id_by_phrase(phrase=title)
+    session["title_data"] = requester.get_title_data(title_id)
+    return redirect(url_for("routes.title_page"))
 
 
 @bp.route("/title", methods=["GET", "POST"])
