@@ -1,8 +1,12 @@
+from unittest.mock import MagicMock, patch
+
+import pytest
+
 from binge import create_app
+from binge.forms import PeroidForm
+from binge.routes import _check_if_can_be_binged, _redirect_to_answer_page
 from tests.testing_api_responses import title_data
 from tests.testing_endpoint_responses import home_form_btn, home_form_field
-from unittest.mock import MagicMock, patch
-from binge.routes import _redirect_to_answer_page, _check_if_can_be_binged
 
 
 def test_render_home_page(client):
@@ -13,7 +17,7 @@ def test_render_home_page(client):
 
 
 def test_render_title_page(client, session):
-    session_data = session("title_data", title_data)
+    session("title_data", title_data)
     response = client.get("/title")
     result = response.data.decode("utf-8")
     assert title_data["title"] in result
