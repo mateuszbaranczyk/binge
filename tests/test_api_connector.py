@@ -2,21 +2,14 @@ from unittest.mock import patch
 
 import pytest
 
-# black/isort conflict
-# fmt: off
-from binge.api_connector import Requester
-from tests.testing_api_responses import (SearchSeries_response,
-                                         SeasonEpisodes_response,
-                                         Title_response,
-                                         Title_response_without_seasons,
-                                         result_without_seasons, title_data)
 
-# fmt: on
+from binge.api_connector import Requester
+from tests import testing_api_responses as api
 
 
 @patch("requests.get")
 def test_get_id_by_phrase(mocked_request):
-    mocked_request.return_value.text = str(SearchSeries_response)
+    mocked_request.return_value.text = str(api.SearchSeries_response)
     mocked_request.return_value.status_code = 200
     requester = Requester()
     result = requester.get_id_by_phrase("lost")
@@ -27,17 +20,17 @@ def test_get_id_by_phrase(mocked_request):
     "input,expected_result",
     [
         (
-            Title_response,
-            title_data,
+            api.Title_response,
+            api.title_data,
         ),
         (
-            Title_response_without_seasons,
-            result_without_seasons,
+            api.Title_response_without_seasons,
+            api.result_without_seasons,
         ),
     ],
 )
 @patch("requests.get")
-def test_get_title_data(mocked_request, input, expected_result):
+def test_get_api_title_data(mocked_request, input, expected_result):
     mocked_request.return_value.text = str(input)
     mocked_request.return_value.status_code = 200
     requester = Requester()
@@ -57,11 +50,13 @@ def test_get_title_duration(get_season_duration):
 @patch("requests.get")
 @patch("binge.api_connector.Requester.get_title_data")
 def test_get_season_duration(get_title_data, mocked_request, num_seasons):
-    mocked_request.return_value.text = str(SeasonEpisodes_response)
+    mocked_request.return_value.text = str(api.SeasonEpisodes_response)
     mocked_request.return_value.status_code = 200
     get_title_data.return_value = ("3", "full_title", "image", "30")
     requester = Requester()
-    result = requester.get_season_duration(title_id="tt0411008", season_number=num_seasons)
+    result = requester.get_season_duration(
+        title_id="tt0411008", season_number=num_seasons
+    )
     assert result == 60
 
 
@@ -88,6 +83,8 @@ def test_make_request_rises_error_with_bad_request(mocked_request):
 def test_requester():
     requester = Requester()
     title_id = requester.get_id_by_phrase("House of the Dragon")
-    title_data = requester.get_title_data(title_id)
-    title_duration = requester.get_title_duration(title_id, int(title_data["seasons"]))
+    api.title_data = requester.get_api.title_data(title_id)
+    title_duration = requester.get_title_duration(
+        title_id, int(api.title_data["seasons"])
+    )
     assert title_duration == 615
