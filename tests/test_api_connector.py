@@ -53,14 +53,15 @@ def test_get_title_duration(get_season_duration):
     assert result == 120
 
 
+@pytest.mark.parametrize("num_seasons", [1, 2, 3])
 @patch("requests.get")
 @patch("binge.api_connector.Requester.get_title_data")
-def test_get_season_duration(get_title_data, mocked_request):
+def test_get_season_duration(get_title_data, mocked_request, num_seasons):
     mocked_request.return_value.text = str(SeasonEpisodes_response)
     mocked_request.return_value.status_code = 200
     get_title_data.return_value = ("3", "full_title", "image", "30")
     requester = Requester()
-    result = requester.get_season_duration(title_id="tt0411008", season_number=1)
+    result = requester.get_season_duration(title_id="tt0411008", season_number=num_seasons)
     assert result == 60
 
 
@@ -88,5 +89,5 @@ def test_requester():
     requester = Requester()
     title_id = requester.get_id_by_phrase("House of the Dragon")
     title_data = requester.get_title_data(title_id)
-    title_duration = requester.get_title_duration(title_id, int(title_data[0]))
+    title_duration = requester.get_title_duration(title_id, int(title_data["seasons"]))
     assert title_duration == 615
