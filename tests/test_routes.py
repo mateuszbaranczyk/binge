@@ -17,7 +17,7 @@ def test_render_home_page(client):
 
 
 def test_render_title_page(client, session):
-    session("title_data", title_data)
+    session(title_data=title_data)
     response = client.get("/title")
     result = response.data.decode("utf-8")
     assert title_data["title"] in result
@@ -27,7 +27,7 @@ def test_render_title_page(client, session):
 
 def test_render_answer_page(client, session):
     expected_result = "test msg"
-    session("message", expected_result)
+    session(message=expected_result)
     response = client.get("/answer")
     assert expected_result in response.data.decode("utf-8")
 
@@ -35,7 +35,7 @@ def test_render_answer_page(client, session):
 @patch("binge.api_connector.requester.get_title_duration")
 def test_redirect_to_answer_page(get_title_duration, app, session):
     title_data = {"id": "test_id", "seasons": "1"}
-    session("title_data", title_data)
+    session(title_data=title_data)
     get_title_duration.return_value = 12
     form = _create_form(peroid="1", duration="24")
     with app.test_request_context("/title", form=PeroidForm(), title_data=title_data):
