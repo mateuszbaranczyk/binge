@@ -21,9 +21,10 @@ def client(app):
 
 @pytest.fixture
 def session(client):
-    def pass_data_to_session(key: str, value: object):
+    def pass_data_to_session(**kwargs):
         with client.session_transaction() as session:
-            session[key] = value
+            for key in kwargs:
+                session[key] = kwargs[key]
 
     return pass_data_to_session
 
