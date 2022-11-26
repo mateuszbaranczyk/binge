@@ -33,13 +33,16 @@ def test_render_answer_page(client, session):
 
 
 @patch("binge.api_connector.requester.get_title_duration")
-def test_redirect_to_answer_page(get_title_duration, app, session):
+def test_redirect_to_answer_page(get_title_duration, client, session):
     title_data = {"id": "test_id", "seasons": "1"}
     session(title_data=title_data)
     get_title_duration.return_value = 12
     form = _create_form(peroid="1", duration="24")
-    with app.test_request_context("/title", form=PeroidForm(), title_data=title_data):
-        _redirect_to_answer_page(form, title_data)
+    with client:
+        client.get("/title")
+        response = _redirect_to_answer_page(form, title_data)
+    assert response.status_code == 302
+    assert response.location == "/answer"
 
 
 def _create_form(peroid: str, duration: str) -> object:

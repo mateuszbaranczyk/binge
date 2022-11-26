@@ -27,7 +27,7 @@ def title_page():
     return render_template("title.html", form=form, title_data=title_data)
 
 
-def _redirect_to_answer_page(form: PeroidForm, title_data: dict) -> "Response":
+def _redirect_to_answer_page(form: PeroidForm, title_data: dict) -> "redirect":
     title_duration = requester.get_title_duration(
         title_data["id"], int(title_data["seasons"])
     )
@@ -37,7 +37,7 @@ def _redirect_to_answer_page(form: PeroidForm, title_data: dict) -> "Response":
     session["message"] = _check_if_can_be_binged(
         int(peroid), int(duration), title_duration
     )
-    return redirect(url_for("answer"))
+    return redirect(url_for("routes.answer"))
 
 
 def _check_if_can_be_binged(peroid: int, duration: int, title_duration: int) -> str:
