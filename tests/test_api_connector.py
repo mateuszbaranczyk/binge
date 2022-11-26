@@ -78,7 +78,7 @@ def test_make_request_rises_error_with_bad_request(mocked_request):
     mocked_request.return_value.status_code = 404
     requester = Requester()
     try:
-        result = requester._make_request("query", "query_params")  # noqa: F841
+        requester._make_request("query", "query_params")
     except AssertionError:
         pass
 

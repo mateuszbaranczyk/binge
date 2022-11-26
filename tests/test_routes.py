@@ -44,10 +44,10 @@ def test_render_title_page(client, session):
 
 
 def test_render_answer_page(client, session):
-    expected_result = "test msg"
+    expected_result = b"test msg"
     session(message=expected_result)
     response = client.get("/answer")
-    assert expected_result in response.data.decode("utf-8")
+    assert expected_result in response.data
 
 
 @patch("binge.api_connector.requester.get_title_duration")
