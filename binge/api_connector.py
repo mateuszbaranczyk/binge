@@ -29,11 +29,9 @@ class Requester:
         }
 
     def get_title_duration(self, title_id: str, num_seasons: int) -> int:
-        season = 1
-        seasons_duration = []
-        while season <= num_seasons:
-            seasons_duration.append(self.get_season_duration(title_id, season))
-            season += 1
+        seasons_duration = [
+            self.get_season_duration(title_id, season) for season in range(num_seasons)
+        ]
         return sum(seasons_duration)
 
     def get_season_duration(self, title_id: str, season_number: int) -> int:
