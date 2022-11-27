@@ -347,7 +347,7 @@ Title_response_without_seasons = {
     "id": "id",
 }
 
-standard_result = {
+title_data = {
     "seasons": "6",
     "title": "Lost (TV Series 2004–2010)",
     "image": "https://aws.com/img/gole_baby.jpg",

@@ -10,12 +10,15 @@ bp = Blueprint("routes", __name__)
 def main_page():
     form = QueryForm()
     if form.validate_on_submit():
-        title = form.title.data
-        title_id = requester.get_id_by_phrase(phrase=title)
-        title_data = requester.get_title_data(title_id)
-        session["title_data"] = title_data
-        return redirect(url_for("routes.title_page"))
+        _redirect_to_title_page(form=form)
     return render_template("home.html", form=form)
+
+
+def _redirect_to_title_page(form: QueryForm) -> "redirect":
+    title = form.title.data
+    title_id = requester.get_id_by_phrase(phrase=title)
+    session["title_data"] = requester.get_title_data(title_id)
+    return redirect(url_for("routes.title_page"))
 
 
 @bp.route("/title", methods=["GET", "POST"])
@@ -23,17 +26,21 @@ def title_page():
     form = PeroidForm()
     title_data = session.get("title_data")
     if form.validate_on_submit():
-        title_duration = requester.get_title_duration(
-            title_data["id"], int(title_data["seasons"])
-        )
-        title_duration = title_duration
-        peroid = form.peroid.data
-        duration = form.duration.data
-        session["message"] = _check_if_can_be_binged(
-            int(peroid), int(duration), title_duration
-        )
-        return redirect(url_for("answer"))
+        _redirect_to_answer_page(form=form, title_data=title_data)
     return render_template("title.html", form=form, title_data=title_data)
+
+
+def _redirect_to_answer_page(form: PeroidForm, title_data: dict) -> "redirect":
+    title_duration = requester.get_title_duration(
+        title_data["id"], int(title_data["seasons"])
+    )
+    title_duration = title_duration
+    peroid = form.peroid.data
+    duration = form.duration.data
+    session["message"] = _check_if_can_be_binged(
+        int(peroid), int(duration), title_duration
+    )
+    return redirect(url_for("routes.answer"))
 
 
 def _check_if_can_be_binged(peroid: int, duration: int, title_duration: int) -> str:
