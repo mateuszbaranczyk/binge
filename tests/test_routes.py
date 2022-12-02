@@ -8,7 +8,7 @@ from binge.forms import PeroidForm
 # black/isort conflict
 # fmt: off
 from binge.routes import (_check_if_can_be_binged, _create_message,
-                          _redirect_to_title_page)
+                          _get_title_data)
 # fmt: on
 from tests.testing_api_responses import title_data
 from tests.testing_endpoint_responses import home_form_btn, home_form_field
@@ -23,13 +23,13 @@ def test_render_home_page(client):
 
 @patch("binge.api_connector.requester.get_id_by_phrase")
 @patch("binge.api_connector.requester.get_title_data")
-def test_redirect_to_title_page(get_id_by_phrase, get_title_data, client):
+def test_add_title_data_to_session(get_id_by_phrase, get_title_data, client):
     get_id_by_phrase.return_value = "ID"
     get_title_data.return_value = title_data
     with client:
         client.get("/")
         form = _create_query_form(title="test")
-        redirect = _redirect_to_title_page(form=form)
+        _get_title_data(form=form)
     assert redirect.status_code == 302
     assert redirect.location == "/title"
 
@@ -51,13 +51,13 @@ def test_render_answer_page(client, session):
 
 
 @patch("binge.api_connector.requester.get_title_duration")
-def test_redirect_to_answer_page(get_title_duration, client, session):
-    session(title_data=title_data)
+def test_add_message_to_session(get_title_duration, client, session):
     get_title_duration.return_value = 12
     with client:
         client.get("/title")
         form = _create_peroid_form(peroid="1", duration="24")
-        redirect = _create_message(form, title_data)
+        _create_message(form=form, title_data={"id": "11", "seasons": "22"})
+        message = session["message"]
     assert redirect.status_code == 302
     assert redirect.location == "/answer"
 
