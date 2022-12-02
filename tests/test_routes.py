@@ -27,9 +27,8 @@ def test_add_title_data_to_session(get_id_by_phrase, get_title_data, client):
     get_id_by_phrase.return_value = "ID"
     get_title_data.return_value = title_data
     with client:
-        client.get("/")
-        form = _create_query_form(title="test")
-        _get_title_data(form=form)
+        client.post("/", data={"form-title": "title"})
+
     assert redirect.status_code == 302
     assert redirect.location == "/title"
 
