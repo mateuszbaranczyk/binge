@@ -55,7 +55,8 @@ def _check_if_can_be_binged(peroid: int, duration: int, title_duration: int) -> 
 
 @bp.route("/answer", methods=["GET", "POST"])
 def answer():
-    return render_template("answer.html", message=session["message"])
+    message = session["message"]
+    return render_template("answer.html", message=message)
 
 
 @bp.route("/about", methods=["GET"])
