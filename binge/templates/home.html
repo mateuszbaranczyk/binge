@@ -4,11 +4,11 @@
 
 <p class="h2">What series do you want to binge?</p>
 
-    <form method="POST" action='/title'>
+    <form method="POST">
         <div class="input-group">
             {{ form.csrf_token }}
             {{ form.title(size=20, class="form-control") }}
-            <input class="btn btn-secondary" type="submit" value="Find it!">
+            {{ form.find_it(class="btn btn-secondary") }}
         </div>
     </form>
 

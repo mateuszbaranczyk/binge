@@ -7,7 +7,7 @@ from binge.forms import PeroidForm
 
 # black/isort conflict
 # fmt: off
-from binge.routes import (_check_if_can_be_binged, _redirect_to_answer_page,
+from binge.routes import (_check_if_can_be_binged, _create_message,
                           _redirect_to_title_page)
 # fmt: on
 from tests.testing_api_responses import title_data
@@ -57,7 +57,7 @@ def test_redirect_to_answer_page(get_title_duration, client, session):
     with client:
         client.get("/title")
         form = _create_peroid_form(peroid="1", duration="24")
-        redirect = _redirect_to_answer_page(form, title_data)
+        redirect = _create_message(form, title_data)
     assert redirect.status_code == 302
     assert redirect.location == "/answer"
 
