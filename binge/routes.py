@@ -36,11 +36,10 @@ def _create_message(form: PeroidForm, title_data: dict) -> None:
     title_duration = requester.get_title_duration(
         title_data["id"], int(title_data["seasons"])
     )
-    title_duration = title_duration
-    peroid = form.peroid.data
-    duration = form.duration.data
+    peroid = int(form.peroid.data)
+    duration = int(form.duration.data)
     session["message"] = _check_if_can_be_binged(
-        int(peroid), int(duration), title_duration
+        peroid, duration, title_duration
     )
     return None
 
