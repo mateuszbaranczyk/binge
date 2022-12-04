@@ -7,10 +7,6 @@ from flask import Flask
 
 from flask_session import Session
 
-# enviroment variables
-# FLASK_APP=binge
-# FLASK_DEBUG=True
-
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
@@ -20,6 +16,7 @@ def create_app(test_config=None):
 
     app.config["SESSION_PERMANENT"] = False
     app.config["SESSION_TYPE"] = "filesystem"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///binge.db"
     _session = Session()
     _session.init_app(app)
 
@@ -36,5 +33,11 @@ def create_app(test_config=None):
     from . import routes
 
     app.register_blueprint(routes.bp)
+
+    from .database import db
+    db.init_app(app)
+    
+    with app.app_context():
+        db.create_all()
 
     return app
