@@ -51,7 +51,3 @@ class Requester:
             return literal_eval(response.text)  # only for testing
         except ValueError:  # TODO fix testing resources
             return json.loads(response.text)
-
-
-if __name__ == "binge.api_connector":
-    requester = Requester()

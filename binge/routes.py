@@ -1,10 +1,10 @@
 from flask import Blueprint, redirect, render_template, session, url_for
 
-from binge.api_connector import requester
+from binge.api_connector import Requester
 from binge.forms import PeroidForm, QueryForm
 
 bp = Blueprint("routes", __name__)
-
+requester = Requester()
 
 @bp.route("/", methods=["GET", "POST"])
 def main_page():

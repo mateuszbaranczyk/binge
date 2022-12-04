@@ -20,8 +20,8 @@ def test_render_home_page(client):
     assert home_form_field in response.text
 
 
-@patch("binge.api_connector.requester.get_id_by_phrase")
-@patch("binge.api_connector.requester.get_title_data")
+@patch("binge.api_connector.Requester.get_id_by_phrase")
+@patch("binge.api_connector.Requester.get_title_data")
 def test_add_title_data_to_session(get_title_data, get_id_by_phrase, client):
     get_id_by_phrase.return_value = "ID"
     get_title_data.return_value = title_data
@@ -47,7 +47,7 @@ def test_render_answer_page(client, session):
     assert expected_result in response.data
 
 
-@patch("binge.api_connector.requester.get_title_duration")
+@patch("binge.api_connector.Requester.get_title_duration")
 def test_add_message_to_session(get_title_duration, client, session):
     get_title_duration.return_value = 12
     session(title_data=title_data)
