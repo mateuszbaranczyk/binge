@@ -46,7 +46,8 @@ def pytest_cmdline_preparse(config, args):
 
     _pytest.skipping.skip = no_skip
 
-#TODO try to use it
+
+# TODO try to use it
 # import pytest
 
 # old_skipif = pytest.mark.skipif
