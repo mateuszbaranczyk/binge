@@ -2,7 +2,6 @@ from unittest.mock import patch
 
 import pytest
 
-
 from binge.api_connector import Requester
 from tests import testing_api_responses as api
 
