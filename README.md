@@ -3,19 +3,21 @@
 ## Installation for dev
 Simply copy below comands one after one.
 
+First of all install [poetry](https://python-poetry.org/docs/).
+
 Download project:
 ```
 git clone git@github.com:mateuszbaranczyk/binge.git
 ```
-Create virtual env:
+Create virtual env and install dependencies. In root:
 ```
-python3 -m venv binge-env
+poetry install
 ```
 Activate env:
 ```
-source binge-env/bin/activate
+poetry shell
 ```
-Install packages:
+Run flask server. With `--debug` or not:
 ```
-pip install -r requirements.txt  
+flask --app binge --debug run 
 ```
