@@ -8,7 +8,7 @@ bp = Blueprint("routes", __name__)
 
 @bp.route("/", methods=["GET", "POST"])
 def main_page():
-    form = QueryForm()
+    form = QueryForm(prefix="form")
     if form.validate_on_submit():
         _get_title_data(form=form)
         return redirect(url_for("routes.title_page"))
@@ -24,7 +24,7 @@ def _get_title_data(form: QueryForm) -> None:
 
 @bp.route("/title", methods=["GET", "POST"])
 def title_page():
-    form = PeroidForm()
+    form = PeroidForm(prefix="form")
     title_data = session.get("title_data")
     if form.validate_on_submit():
         _create_message(form=form, title_data=title_data)
