@@ -29,6 +29,10 @@ def session(client):
 
     return pass_data_to_session
 
+@pytest.fixture
+def app_context(app):
+    with app.app_context():
+        yield
 
 def pytest_addoption(parser):
     parser.addoption(
