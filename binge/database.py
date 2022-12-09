@@ -1,15 +1,14 @@
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from flask_sqlalchemy import model, Column, String, Text, session
 
 
-class TitleData(db.Model):
-    id = db.Column(db.String, primary_key=True)
-    title = db.Column(db.String)
-    description = db.Column(db.Text)
-    image = db.Column(db.String)
-    seasons = db.Column(db.String)
-    duration = db.Column(db.String, nullable=True)
+
+class TitleData(model.Model):
+    id = Column(String, primary_key=True)
+    title = Column(String)
+    description = Column(Text)
+    image = Column(String)
+    seasons = Column(String)
+    duration = Column(String, nullable=True)
 
 
 class Operations:
@@ -25,13 +24,13 @@ class Operations:
             seasons=title_data["seasons"],
             duration=title_data["duration"],
         )
-        db.session.add(data_to_commit)
-        db.session.commit()
+        session.add(data_to_commit)
+        session.commit()
         # TODO logging
         return None
 
     def get_title(self, id: str) -> dict:
-        title = db.get(TitleData, id)
+        title = session.get(TitleData, id)
         db.get()
         return title.__dict__
 
