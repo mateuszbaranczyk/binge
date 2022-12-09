@@ -20,13 +20,13 @@ class Operations:
         data_to_commit = TitleData(
             id=title_data["id"],
             title=title_data["title"],
-            descriptrion=title_data["description"],
+            description=title_data["description"],
             image=title_data["image"],
             seasons=title_data["seasons"],
             duration=title_data["duration"],
         )
-        db.add(data_to_commit)
-        db.commit()
+        db.session.add(data_to_commit)
+        db.session.commit()
         # TODO logging
         return None
 
