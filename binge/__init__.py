@@ -6,7 +6,9 @@ import secrets
 from flask import Flask
 
 from flask_session import Session
+from flask_sqlalchemy import SQLAlchemy
 
+db = SQLAlchemy()
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
@@ -34,7 +36,7 @@ def create_app(test_config=None):
 
     app.register_blueprint(routes.bp)
 
-    from .database import db
+
     db.init_app(app)
     
     with app.app_context():
