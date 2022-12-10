@@ -6,6 +6,7 @@ from binge.forms import PeroidForm, QueryForm
 bp = Blueprint("routes", __name__)
 requester = Requester()
 
+
 @bp.route("/", methods=["GET", "POST"])
 def main_page():
     form = QueryForm(prefix="form")
@@ -38,9 +39,7 @@ def _create_message(form: PeroidForm, title_data: dict) -> None:
     )
     peroid = int(form.peroid.data)
     duration = int(form.duration.data)
-    session["message"] = _check_if_can_be_binged(
-        peroid, duration, title_duration
-    )
+    session["message"] = _check_if_can_be_binged(peroid, duration, title_duration)
     return None
 
 

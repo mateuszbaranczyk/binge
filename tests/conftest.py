@@ -1,8 +1,7 @@
 import _pytest.skipping
 import pytest
 
-from binge import create_app
-from binge import db
+from binge import create_app, db
 
 
 @pytest.fixture
