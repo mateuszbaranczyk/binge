@@ -2,6 +2,7 @@ import _pytest.skipping
 import pytest
 
 from binge import create_app
+from binge import db
 
 
 @pytest.fixture
@@ -10,6 +11,7 @@ def app():
         {
             "TESTING": True,
             "WTF_CSRF_ENABLED": False,
+            "SQLALCHEMY_DATABASE_URI": "sqlite:///test.db",
         }
     )
     yield app
@@ -29,10 +31,12 @@ def session(client):
 
     return pass_data_to_session
 
+
 @pytest.fixture
 def app_context(app):
     with app.app_context():
         yield
+
 
 def pytest_addoption(parser):
     parser.addoption(
