@@ -1,31 +1,30 @@
-from flask_sqlalchemy import model, Column, String, Text, session
+from binge import db
 
 
-
-class TitleData(model.Model):
-    id = Column(String, primary_key=True)
-    title = Column(String)
-    description = Column(Text)
-    image = Column(String)
-    seasons = Column(String)
-    duration = Column(String, nullable=True)
+class TitleData(db.Model):
+    title_id = db.Column(db.String, primary_key=True)
+    title = db.Column(db.String)
+    description = db.Column(db.Text)
+    image = db.Column(db.String)
+    seasons = db.Column(db.String)
+    duration = db.Column(db.String, nullable=True)
 
 
 class Operations:
     def __init__(self):
-        pass
+        self.db = db
 
     def save_title(self, title_data: dict) -> None:
         data_to_commit = TitleData(
-            id=title_data["id"],
+            title_id=title_data["id"],
             title=title_data["title"],
             description=title_data["description"],
             image=title_data["image"],
             seasons=title_data["seasons"],
             duration=title_data["duration"],
         )
-        session.add(data_to_commit)
-        session.commit()
+        self.db.session.add(data_to_commit)
+        self.db.session.commit()
         # TODO logging
         return None
 
